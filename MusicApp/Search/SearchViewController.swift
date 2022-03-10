@@ -22,6 +22,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     
     private var searchViewModel = SearchViewModel.init(cells: [])
     private var timer: Timer?
+    private lazy var footerView = FooterView()
     
     // MARK: - Setup
     private func setup() {
@@ -42,16 +43,19 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         setupTableView()
         setupSearchBar()
         setup()
+        
+        searchBar(searchController.searchBar, textDidChange: "Korol I Shut")
     }
     
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .some:
-            print("viewController . some")
         case .displayTracks(let searchViewModel):
             print("viewController .displayTracks")
             self.searchViewModel = searchViewModel
             tableView.reloadData()
+            footerView.hideLoader()
+        case .displayFooterView:
+            footerView.showLoader()
         }
     }
     private func setupSearchBar() {
@@ -67,6 +71,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         
         let nib = UINib(nibName: "TrackCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: TrackCell.reuseId)
+        tableView.tableFooterView = footerView
     }
 }
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -84,12 +89,45 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.set(viewModel: cellViewModel)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellViewModel = searchViewModel.cells[indexPath.row]
+        print(cellViewModel.trackName)
+        
+        let window = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first
+        guard   let trackDetailsView = Bundle.main.loadNibNamed("TrackDetailView", owner: self, options: nil)?.first as? TrackDetailView else { return }
+        trackDetailsView.set(viewModel: cellViewModel)
+        window?.addSubview(trackDetailsView)
+    }
+    
+
+    
+        
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         84
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Please enter search term above..."
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        
+        return label
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        searchViewModel.cells.count > 0 ? 0 : 250
+    }
+}
 
-
+//MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
@@ -100,3 +138,5 @@ extension SearchViewController: UISearchBarDelegate {
         })
     }
 }
+
+

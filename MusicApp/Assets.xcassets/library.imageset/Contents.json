@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Library - Selected.png",
+      "filename" : "library.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Library - Selected@2x.png",
+      "filename" : "library@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Library - Selected@3x.png",
+      "filename" : "library@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

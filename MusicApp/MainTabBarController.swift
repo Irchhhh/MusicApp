@@ -14,7 +14,7 @@ class MainTabBarController: UITabBarController {
         
         viewControllers = [
             generateNavigationVC(rootViewController: searchViewController, title: "Search", image: #imageLiteral(resourceName: "Search")),
-            generateNavigationVC(rootViewController: ViewController(), title: "Library", image: #imageLiteral(resourceName: "Library - Selected"))
+            generateNavigationVC(rootViewController: ViewController(), title: "Library", image: #imageLiteral(resourceName: "library"))
         ]
     }
     
