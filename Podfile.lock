@@ -1,0 +1,26 @@
+PODS:
+  - Alamofire (5.4.4)
+  - SDWebImage (5.12.2):
+    - SDWebImage/Core (= 5.12.2)
+  - SDWebImage/Core (5.12.2)
+  - SPStorkController (1.8.5)
+
+DEPENDENCIES:
+  - Alamofire
+  - SDWebImage (~> 5.0)
+  - SPStorkController
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - SDWebImage
+    - SPStorkController
+
+SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SPStorkController: 68966ed3134de2be2a8bbd1475c7e81f3f7d01ee
+
+PODFILE CHECKSUM: 98e8205816312284094740b2a1d0fd3d0cdf27c9
+
+COCOAPODS: 1.11.2
