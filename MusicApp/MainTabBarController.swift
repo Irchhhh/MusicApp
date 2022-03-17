@@ -23,7 +23,8 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         tabBar.tintColor = #colorLiteral(red: 1, green: 0, blue: 0.3764705882, alpha: 1)
-        let library = Library()
+        var library = Library()
+        library.tabBarDelegate = self
         let hostingViewController = UIHostingController(rootView: library)
         
         hostingViewController.tabBarItem.image = #imageLiteral(resourceName: "library")

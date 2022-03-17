@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 import AVKit
 
-protocol TrackMovingDelegate: AnyObject {
+protocol TrackMovingDelegate {
     func moveBackForPreviousTrack() -> SearchViewModel.Cell?
     func moveForwardForPreviousTrack() -> SearchViewModel.Cell?
 
@@ -41,7 +41,7 @@ class TrackDetailView: UIView {
         return avPlayer
     }()
     
-    weak var delegate: TrackMovingDelegate?
+     var delegate: TrackMovingDelegate?
     weak var tabBarDelegate: MainTabBarControllerProtocol?
     
    //MARK: - awakeFromNib
@@ -147,6 +147,12 @@ class TrackDetailView: UIView {
             gesturePanChange(gesture: gesture)
         case .ended:
             handlePanEnded(gesture: gesture)
+        case .possible:
+            print("possible")
+        case .cancelled:
+            print("cancelled")
+        case .failed:
+            print("failed")
         @unknown default:
             print("unknown default")
         }
@@ -194,6 +200,14 @@ class TrackDetailView: UIView {
                     self.tabBarDelegate?.minimizeTrackDetailController()
                 }
             }, completion: nil)
+        case .possible:
+            print("possible")
+        case .began:
+            print("began")
+        case .cancelled:
+            print("cancelled")
+        case .failed:
+            print("failed")
         @unknown default:
             print("unknown default")
         }
