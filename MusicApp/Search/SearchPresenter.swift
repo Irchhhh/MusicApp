@@ -39,4 +39,5 @@ class SearchPresenter: SearchPresentationLogic {
             previewUrl: track.previewUrl
         )
     }
+    
 }
